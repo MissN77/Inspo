@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Quote</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+        }
+        #quote-container {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #quote {
+            font-size: 24px;
+            font-style: italic;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        #author, #source {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        #date {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="quote-container">
+        <p id="quote"></p>
+        <p id="author"></p>
+        <p id="source"></p>
+        <p id="date"></p>
+    </div>
+
+    <script>
+        const quotes = [
+            { quote: "Habits are the compound interest of self-improvement.", author: "James Clear", source: "Atomic Habits" },
+            { quote: "You do not rise to the level of your goals. You fall to the level of your systems.", author: "James Clear", source: "Atomic Habits" },
+            { quote: "Your inbox is a to-do list that anyone in the world can add an item to.", author: "David Allen", source: "Getting Things Done" },
+            { quote: "Your mind is for having ideas, not holding them.", author: "David Allen", source: "Getting Things Done" },
+            { quote: "The most effective way to do it, is to do it.", author: "Ali Abdaal", source: "" },
+            { quote: "Begin with the end in mind.", author: "Stephen Covey", source: "The 7 Habits of Highly Effective People" },
+            { quote: "The key is not to prioritize what's on your schedule, but to schedule your priorities.", author: "Stephen Covey", source: "The 7 Habits of Highly Effective People" },
+            { quote: "Champions don't do extraordinary things. They do ordinary things, but they do them without thinking, too fast for the other team to react.", author: "Charles Duhigg", source: "The Power of Habit" },
+            { quote: "The difference between who you are and who you want to be is what you do.", author: "Charles Duhigg", source: "The Power of Habit" },
+            { quote: "Two core abilities for thriving in the new economy: 1) The ability to quickly master hard things. 2) The ability to produce at an elite level, in terms of both quality and speed.", author: "Cal Newport", source: "Deep Work" },
+            { quote: "The best way to predict the future is to create it.", author: "Peter Drucker", source: "" },
+            { quote: "What gets measured gets managed.", author: "Peter Drucker", source: "" }
+        ];
+
+        function getQuoteForToday() {
+            const today = new Date();
+            const start = new Date(today.getFullYear(), 0, 0);
+            const diff = today - start;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay);
+            const quoteIndex = dayOfYear % quotes.length;
+            return quotes[quoteIndex];
+        }
+
+        function updateQuote() {
+            const { quote, author, source } = getQuoteForToday();
+            document.getElementById('quote').textContent = `"${quote}"`;
+            document.getElementById('author').textContent = `- ${author}`;
+            document.getElementById('source').textContent = source ? `(${source})` : '';
+            document.getElementById('date').textContent = new Date().toLocaleDateString();
+        }
+
+        updateQuote();
+    </script>
+</body>
+</html>
